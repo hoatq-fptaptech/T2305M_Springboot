@@ -1,5 +1,6 @@
 package com.example.t2305m_springboot.service;
 
+import com.example.t2305m_springboot.dto.req.CategoryReq;
 import com.example.t2305m_springboot.entity.Category;
 import com.example.t2305m_springboot.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category create(Category category){
-        return categoryRepository.save(category);
+    public Category create(CategoryReq category){
+        Category c = new Category();
+        c.setId(category.getId());
+        c.setName(category.getName());
+        return categoryRepository.save(c);
     }
 }
