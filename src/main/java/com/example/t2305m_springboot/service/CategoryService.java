@@ -8,6 +8,7 @@ import com.example.t2305m_springboot.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +22,7 @@ public class CategoryService {
     }
 
     public List<CategoryRes> all(){
-        return categoryRepository.findAll().stream().map(
-                categoryMapper::toDTO
-        ).toList();
+        return categoryRepository.findAll().stream().map(categoryMapper::toDTO).toList();
     }
 
     public CategoryRes create(CategoryReq category){
