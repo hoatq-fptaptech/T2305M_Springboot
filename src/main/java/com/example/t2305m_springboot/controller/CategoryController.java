@@ -1,6 +1,7 @@
 package com.example.t2305m_springboot.controller;
 
 import com.example.t2305m_springboot.dto.req.CategoryReq;
+import com.example.t2305m_springboot.dto.res.CategoryRes;
 import com.example.t2305m_springboot.entity.Category;
 import com.example.t2305m_springboot.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +17,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping()
-    public List<Category> getAllCategory(){
+    public List<CategoryRes> getAllCategory(){
         return categoryService.all();
     }
 
     @PostMapping()
-    public ResponseEntity<Category> createCategory(@RequestBody CategoryReq category){
+    public ResponseEntity<CategoryRes> createCategory(@RequestBody CategoryReq category){
         return ResponseEntity.ok(categoryService.create(category));
     }
 

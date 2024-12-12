@@ -1,8 +1,6 @@
-package com.example.t2305m_springboot.dto.req;
-import lombok.Getter;
-import lombok.Setter;
+package com.example.t2305m_springboot.dto.res;
 
-public class CategoryReq {
+public class CategoryRes {
     private Long id;
     private String name;
 
