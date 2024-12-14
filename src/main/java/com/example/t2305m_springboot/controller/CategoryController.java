@@ -26,7 +26,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.create(category));
     }
 
-    @GetMapping(name = "search")
+    @GetMapping("search")
     public List<CategoryRes> search(@RequestBody String s){
         return categoryService.searchByName(s);
     }
