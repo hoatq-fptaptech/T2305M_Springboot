@@ -30,4 +30,9 @@ public class CategoryService {
                 categoryRepository.save(
                         categoryMapper.toEntity(category)));
     }
+
+    public List<CategoryRes> searchByName(String s){
+        return categoryRepository.findAllByNameContains(s)
+                .stream().map(categoryMapper::toDTO).toList();
+    }
 }
