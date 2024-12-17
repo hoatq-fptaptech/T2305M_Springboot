@@ -23,8 +23,9 @@ public class OrderService {
     }
 
     @Transactional
-    public void createOrder(OrderReq orderReq){
+    public Order createOrder(OrderReq orderReq){
         Order order = new Order();
+        order.setGrandTotal(0.0);
         List<OrderItem> items = orderReq.getItems().stream().map(
                 item-> {
                     OrderItem orderItem = new OrderItem();
@@ -47,6 +48,6 @@ public class OrderService {
         order.setCreateAt(new Date());
         order.setShippingAddress(orderReq.getShippingAddress());
         order.setTelephone(orderReq.getTelephone());
-        orderRepository.save(order);
+        return orderRepository.save(order);
     }
 }
