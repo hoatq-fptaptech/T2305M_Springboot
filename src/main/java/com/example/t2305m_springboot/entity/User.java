@@ -2,9 +2,12 @@ package com.example.t2305m_springboot.entity;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +19,17 @@ public class User implements UserDetails {
     private String fullName;
     private String email;
     private String password;
+
+    @ManyToMany(targetEntity = Permission.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_permissions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private List<Permission> permissions;
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
 
     public Long getId() {
         return id;
@@ -43,7 +57,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getPermissions().stream().map(
+                p-> new SimpleGrantedAuthority(p.getPermission())
+        ).collect(Collectors.toList());
     }
 
     public String getPassword() {

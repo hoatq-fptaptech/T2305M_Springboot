@@ -5,6 +5,7 @@ import com.example.t2305m_springboot.dto.res.CategoryRes;
 import com.example.t2305m_springboot.entity.Category;
 import com.example.t2305m_springboot.service.CategoryService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping()
+    @PreAuthorize("hasAnyAuthority('category')")
     public List<CategoryRes> getAllCategory(){
         return categoryService.all();
     }
